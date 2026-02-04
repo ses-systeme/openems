@@ -193,12 +193,6 @@ public class OnRequest implements io.openems.common.websocket.OnRequest {
 
 	private CompletableFuture<User> assertUserToken(WsData wsData) throws OpenemsNamedException {
 
-		final var authService = this.parent.userAuthenticationService;
-		if (authService == null) {
-			throw new OpenemsNamedException(OpenemsError.JSONRPC_UNHANDLED_METHOD,
-					"OAuth authentication is not supported by this OpenEMS instance");
-		}
-
 		final var token = wsData.getToken().orElse(null);
 		if (token == null) {
 			throw new OpenemsNamedException(OpenemsError.COMMON_USER_NOT_AUTHENTICATED, "[user]");
